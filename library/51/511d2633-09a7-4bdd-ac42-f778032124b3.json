@@ -1,0 +1,81 @@
+{
+  "__type__": "cc.EffectAsset",
+  "_name": "pipeline/skybox",
+  "_objFlags": 0,
+  "_native": "",
+  "techniques": [
+    {
+      "passes": [
+        {
+          "rasterizerState": {
+            "cullMode": 0
+          },
+          "program": "pipeline/skybox|sky-vs:vert|sky-fs:frag",
+          "priority": 245,
+          "depthStencilState": {
+            "depthTest": true,
+            "depthWrite": false
+          }
+        }
+      ]
+    }
+  ],
+  "shaders": [
+    {
+      "hash": 925089992,
+      "glsl3": {
+        "vert": "\nprecision mediump float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\nin vec3 a_position;\n\nvoid CCDecode (out vec4 position) {\n  position = vec4(a_position, 1.0);\n}\n\nout vec4 viewDir;\n\nhighp vec4 vert () {\n  CCDecode(viewDir);\n\n  mat4 matViewRotOnly = mat4(mat3(cc_matView));\n  highp vec4 pos = matViewRotOnly * viewDir;\n  highp vec2 f = cc_matProj[3][3] > 0.0 ? vec2(4.8, 2.4) : vec2(cc_matProj[1][1]);\n  pos.xy *= vec2(cc_screenSize.y * cc_screenSize.z, 1.0) * f;\n  pos.zw = vec2(-0.99999 * pos.z, -pos.z);\n  return pos;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision mediump float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\nuniform samplerCube cc_environment;\n\nvec3 unpackNormal(vec4 nmap) {\n  return nmap.xyz * 2.0 - 1.0;\n}\n\nvec3 unpackRGBE(vec4 rgbe) {\n    return rgbe.rgb * pow(2.0, rgbe.a * 255.0 - 128.0);\n}\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec3 ACESToneMap(vec3 color) {\n    const float A = 2.51;\n    const float B = 0.03;\n    const float C = 2.43;\n    const float D = 0.59;\n    const float E = 0.14;\n    return (color * (A * color + B)) / (color * (C * color + D) + E);\n}\n\nvec4 CCFragOutput (vec4 color) {\n  #if !CC_USE_HDR\n    color.rgb = ACESToneMap(color.rgb);\n    color.rgb = LinearToSRGB(color.rgb);\n  #endif\n  return color;\n}\n\nin vec4 viewDir;\n\nvec4 frag () {\n  #if USE_RGBE_CUBEMAP\n    vec3 c = unpackRGBE(texture(cc_environment, viewDir.xyz));\n  #else\n    vec3 c = SRGBToLinear(texture(cc_environment, viewDir.xyz).rgb) * cc_ambientSky.w;\n  #endif\n  return CCFragOutput(vec4(c, 1.0));\n}\n\nout vec4 cc_FragColor;\nvoid main() { cc_FragColor = frag(); }\n"
+      },
+      "glsl1": {
+        "vert": "\nprecision mediump float;\nuniform vec4 cc_screenSize;\nuniform mat4 cc_matView;\nuniform mat4 cc_matProj;\n\nattribute vec3 a_position;\n\nvoid CCDecode (out vec4 position) {\n  position = vec4(a_position, 1.0);\n}\n\nvarying vec4 viewDir;\n\nhighp vec4 vert () {\n  CCDecode(viewDir);\n\n  mat4 matViewRotOnly = mat4(mat3(cc_matView));\n  highp vec4 pos = matViewRotOnly * viewDir;\n  highp vec2 f = cc_matProj[3][3] > 0.0 ? vec2(4.8, 2.4) : vec2(cc_matProj[1][1]);\n  pos.xy *= vec2(cc_screenSize.y * cc_screenSize.z, 1.0) * f;\n  pos.zw = vec2(-0.99999 * pos.z, -pos.z);\n  return pos;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision mediump float;\nuniform vec4 cc_ambientSky;\nuniform samplerCube cc_environment;\n\nvec3 unpackNormal(vec4 nmap) {\n  return nmap.xyz * 2.0 - 1.0;\n}\n\nvec3 unpackRGBE(vec4 rgbe) {\n    return rgbe.rgb * pow(2.0, rgbe.a * 255.0 - 128.0);\n}\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec3 ACESToneMap(vec3 color) {\n    const float A = 2.51;\n    const float B = 0.03;\n    const float C = 2.43;\n    const float D = 0.59;\n    const float E = 0.14;\n    return (color * (A * color + B)) / (color * (C * color + D) + E);\n}\n\nvec4 CCFragOutput (vec4 color) {\n  #if !CC_USE_HDR\n    color.rgb = ACESToneMap(color.rgb);\n    color.rgb = LinearToSRGB(color.rgb);\n  #endif\n  return color;\n}\n\nvarying vec4 viewDir;\n\nvec4 frag () {\n  #if USE_RGBE_CUBEMAP\n    vec3 c = unpackRGBE(textureCube(cc_environment, viewDir.xyz));\n  #else\n    vec3 c = SRGBToLinear(textureCube(cc_environment, viewDir.xyz).rgb) * cc_ambientSky.w;\n  #endif\n  return CCFragOutput(vec4(c, 1.0));\n}\n\nvoid main() { gl_FragColor = frag(); }\n"
+      },
+      "builtins": {
+        "globals": {
+          "blocks": [
+            {
+              "name": "CCGlobal",
+              "defines": []
+            }
+          ],
+          "samplers": [
+            {
+              "name": "cc_environment",
+              "defines": []
+            }
+          ]
+        },
+        "locals": {
+          "blocks": [],
+          "samplers": []
+        }
+      },
+      "defines": [
+        {
+          "name": "CC_USE_IBL",
+          "type": "number",
+          "defines": [],
+          "range": [
+            0,
+            2
+          ]
+        },
+        {
+          "name": "CC_USE_HDR",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "USE_RGBE_CUBEMAP",
+          "type": "boolean",
+          "defines": []
+        }
+      ],
+      "blocks": [],
+      "samplers": [],
+      "name": "pipeline/skybox|sky-vs:vert|sky-fs:frag"
+    }
+  ],
+  "combinations": []
+}

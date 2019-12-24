@@ -1,0 +1,14 @@
+{
+  "ver": "1.0.84",
+  "importer": "javascript",
+  "imported": true,
+  "uuid": "6ff24f78-70c6-4f0c-bd3e-1b032dae50e5",
+  "files": [
+    ".js"
+  ],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/script/item-mgr.js",
+    "importAsPlugin": false
+  }
+}

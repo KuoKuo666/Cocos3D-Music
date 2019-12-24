@@ -1,0 +1,94 @@
+{
+  "__type__": "cc.EffectAsset",
+  "_name": "editor/light",
+  "_objFlags": 0,
+  "_native": "",
+  "techniques": [
+    {
+      "passes": [
+        {
+          "rasterizerState": {
+            "cullMode": 0
+          },
+          "blendState": {
+            "targets": [
+              {
+                "blend": true,
+                "blendSrc": 2,
+                "blendDst": 4,
+                "blendDstAlpha": 4
+              }
+            ]
+          },
+          "program": "editor/light|light-vs:vert|light-fs:frag",
+          "depthStencilState": {
+            "depthTest": true,
+            "depthWrite": false
+          }
+        }
+      ]
+    }
+  ],
+  "shaders": [
+    {
+      "hash": 2128521366,
+      "glsl3": {
+        "vert": "\nprecision mediump float;\nuniform CCLocal {\n  highp mat4 cc_matWorld;\n  highp mat4 cc_matWorldIT;\n};\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\n#define saturate(a) clamp( a, 0.0, 1.0 )\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nuniform Constant {\n  vec4 color;\n  vec4 intensitySize;\n};\n\nin vec3 a_position;\nin vec2 a_texCoord;\nout vec3 v_color;\nout vec2 v_uv;\n\nvec4 vert () {\n  v_color = color.rgb * intensitySize.x * 100.0;\n  #if CC_USE_HDR\n    v_color *= 0.0009765625;\n  #else\n    v_color = LinearToSRGB(v_color * cc_exposure.x);\n  #endif\n  v_uv = a_texCoord;\n  return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0);\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision mediump float;\n\nuniform Constant {\n  vec4 color;\n  vec4 intensitySize;\n};\n\nin vec3 v_color;\nin vec2 v_uv;\n\nfloat sphere(vec3 d, vec3 p) {\n  return smoothstep(1.0 - intensitySize.y, 1.0, 1.0 / length(cross(d, p)));\n}\n\nvec4 frag () {\n  vec2 uv = v_uv - 0.5;\n  vec3 R = normalize(vec3(1.0, uv));\n  return vec4(v_color, mix(sphere(R, vec3(5.0, 0.0, 0.0)), 1.0, dot(uv, uv) < 0.0625 ? 1.0 : 0.0));\n}\n\nout vec4 cc_FragColor;\nvoid main() { cc_FragColor = frag(); }\n"
+      },
+      "glsl1": {
+        "vert": "\nprecision mediump float;\nuniform highp mat4 cc_matWorld;\nuniform mat4 cc_matViewProj;\nuniform vec4 cc_exposure;\n\n#define saturate(a) clamp( a, 0.0, 1.0 )\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nuniform vec4 color;\nuniform vec4 intensitySize;\n\nattribute vec3 a_position;\nattribute vec2 a_texCoord;\nvarying vec3 v_color;\nvarying vec2 v_uv;\n\nvec4 vert () {\n  v_color = color.rgb * intensitySize.x * 100.0;\n  #if CC_USE_HDR\n    v_color *= 0.0009765625;\n  #else\n    v_color = LinearToSRGB(v_color * cc_exposure.x);\n  #endif\n  v_uv = a_texCoord;\n  return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0);\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision mediump float;\n\nuniform vec4 intensitySize;\n\nvarying vec3 v_color;\nvarying vec2 v_uv;\n\nfloat sphere(vec3 d, vec3 p) {\n  return smoothstep(1.0 - intensitySize.y, 1.0, 1.0 / length(cross(d, p)));\n}\n\nvec4 frag () {\n  vec2 uv = v_uv - 0.5;\n  vec3 R = normalize(vec3(1.0, uv));\n  return vec4(v_color, mix(sphere(R, vec3(5.0, 0.0, 0.0)), 1.0, dot(uv, uv) < 0.0625 ? 1.0 : 0.0));\n}\n\nvoid main() { gl_FragColor = frag(); }\n"
+      },
+      "builtins": {
+        "globals": {
+          "blocks": [
+            {
+              "name": "CCGlobal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        },
+        "locals": {
+          "blocks": [
+            {
+              "name": "CCLocal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        }
+      },
+      "defines": [
+        {
+          "name": "CC_USE_HDR",
+          "type": "boolean",
+          "defines": []
+        }
+      ],
+      "blocks": [
+        {
+          "name": "Constant",
+          "members": [
+            {
+              "name": "color",
+              "type": 16,
+              "count": 1
+            },
+            {
+              "name": "intensitySize",
+              "type": 16,
+              "count": 1
+            }
+          ],
+          "defines": [],
+          "binding": 0
+        }
+      ],
+      "samplers": [],
+      "name": "editor/light|light-vs:vert|light-fs:frag"
+    }
+  ],
+  "combinations": []
+}

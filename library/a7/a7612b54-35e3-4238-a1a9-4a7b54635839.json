@@ -1,0 +1,653 @@
+{
+  "__type__": "cc.EffectAsset",
+  "_name": "builtin-toon",
+  "_objFlags": 0,
+  "_native": "",
+  "techniques": [
+    {
+      "passes": [
+        {
+          "rasterizerState": {
+            "cullMode": 1
+          },
+          "program": "builtin-toon|outline-vs:vert|outline-fs:frag",
+          "switch": "USE_OUTLINE_PASS",
+          "properties": {
+            "lineWidth": {
+              "value": [
+                10
+              ],
+              "inspector": {
+                "formerlySerializedAs": "outlineParams.x"
+              },
+              "type": 13,
+              "handleInfo": [
+                "outlineParams",
+                0,
+                13
+              ]
+            },
+            "depthBias": {
+              "value": [
+                0
+              ],
+              "inspector": {
+                "formerlySerializedAs": "outlineParams.y"
+              },
+              "type": 13,
+              "handleInfo": [
+                "outlineParams",
+                1,
+                13
+              ]
+            },
+            "baseColor": {
+              "inspector": {
+                "type": "color"
+              },
+              "type": 16
+            },
+            "baseColorMap": {
+              "value": "grey",
+              "type": 28
+            },
+            "outlineParams": {
+              "type": 16,
+              "inspector": {
+                "visible": false,
+                "deprecated": true
+              },
+              "value": [
+                10,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "program": "builtin-toon|toon-vs:vert|toon-fs:frag",
+          "properties": {
+            "tilingOffset": {
+              "value": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "type": 16
+            },
+            "baseColor": {
+              "value": [
+                0.6,
+                0.6,
+                0.6,
+                1
+              ],
+              "inspector": {
+                "type": "color"
+              },
+              "type": 16
+            },
+            "colorScale": {
+              "value": [
+                1,
+                1,
+                1,
+                0
+              ],
+              "type": 16
+            },
+            "shadeColor1": {
+              "value": [
+                0.4,
+                0.4,
+                0.4,
+                1
+              ],
+              "inspector": {
+                "type": "color"
+              },
+              "type": 16
+            },
+            "shadeColor2": {
+              "value": [
+                0.2,
+                0.2,
+                0.2,
+                1
+              ],
+              "inspector": {
+                "type": "color"
+              },
+              "type": 16
+            },
+            "specular": {
+              "value": [
+                1,
+                1,
+                1,
+                0.3
+              ],
+              "inspector": {
+                "type": "color"
+              },
+              "type": 16
+            },
+            "baseStep": {
+              "value": [
+                0.8
+              ],
+              "inspector": {
+                "formerlySerializedAs": "shadeParams.x"
+              },
+              "type": 13,
+              "handleInfo": [
+                "shadeParams",
+                0,
+                13
+              ]
+            },
+            "baseFeather": {
+              "value": [
+                0.001
+              ],
+              "inspector": {
+                "formerlySerializedAs": "shadeParams.y"
+              },
+              "type": 13,
+              "handleInfo": [
+                "shadeParams",
+                1,
+                13
+              ]
+            },
+            "shadeStep": {
+              "value": [
+                0.5
+              ],
+              "inspector": {
+                "formerlySerializedAs": "shadeParams.z"
+              },
+              "type": 13,
+              "handleInfo": [
+                "shadeParams",
+                2,
+                13
+              ]
+            },
+            "shadeFeather": {
+              "value": [
+                0.001
+              ],
+              "inspector": {
+                "formerlySerializedAs": "shadeParams.w"
+              },
+              "type": 13,
+              "handleInfo": [
+                "shadeParams",
+                3,
+                13
+              ]
+            },
+            "emissive": {
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "inspector": {
+                "type": "color"
+              },
+              "type": 16
+            },
+            "emissiveScale": {
+              "value": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "type": 16
+            },
+            "normalMap": {
+              "value": "normal",
+              "type": 28
+            },
+            "baseColorMap": {
+              "value": "white",
+              "type": 28
+            },
+            "shadeMap1": {
+              "value": "white",
+              "type": 28
+            },
+            "shadeMap2": {
+              "value": "white",
+              "type": 28
+            },
+            "specularMap": {
+              "value": "white",
+              "type": 28
+            },
+            "emissiveMap": {
+              "value": "grey",
+              "type": 28
+            },
+            "shadeParams": {
+              "type": 16,
+              "inspector": {
+                "visible": false,
+                "deprecated": true
+              },
+              "value": [
+                0.8,
+                0.001,
+                0.5,
+                0.001
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "shaders": [
+    {
+      "hash": 3243524097,
+      "glsl3": {
+        "vert": "\nprecision highp float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\n#if CC_USE_BATCHING\n  in float a_dyn_batch_id;\n  uniform CCLocalBatched {\n    highp mat4 cc_matWorlds[10];\n  };\n#else\nuniform CCLocal {\n  highp mat4 cc_matWorld;\n  highp mat4 cc_matWorldIT;\n};\n\n#endif\n\nvoid CCGetWorldMatrix (out highp mat4 matWorld) {\n  #if CC_USE_BATCHING\n    matWorld = cc_matWorlds[int(a_dyn_batch_id + 0.5)];\n  #else\n    matWorld = cc_matWorld;\n  #endif\n}\n\nvoid CCGetWorldMatrixFull (out highp mat4 matWorld, out highp mat4 matWorldIT) {\n  #if CC_USE_BATCHING\n    matWorld = cc_matWorlds[int(a_dyn_batch_id + 0.5)];\n    matWorldIT = matWorld;\n  #else\n    matWorld = cc_matWorld;\n    matWorldIT = cc_matWorldIT;\n  #endif\n}\n\nstruct StandardAttributes {\n  vec4 position;\n  vec3 normal;\n  vec4 tangent;\n  int index;\n};\n\nin vec3 a_position;\nin vec3 a_normal;\nin vec4 a_tangent;\n\nvoid CCDecode (out StandardAttributes attr) {\n  attr.position = vec4(a_position, 1.0);\n  attr.normal = a_normal;\n  attr.tangent = a_tangent;\n}\n\n#if CC_USE_SKINNING\n\nin vec4 a_weights;\nin vec4 a_joints;\nuniform CCSkinningTexture {\n  highp vec4 cc_jointsTextureInfo;\n};\nuniform CCSkinningAnimation {\n  highp vec4 cc_jointsAnimInfo;\n};\nuniform sampler2D cc_jointsTexture;\n\n#if CC_USE_SKINNING == 1\n  highp float decode32(highp vec4 rgba) {\n    rgba = rgba * 255.0;\n    highp float Sign = 1.0 - step(128.0, rgba[3]) * 2.0;\n    highp float Exponent = 2.0 * mod(rgba[3], 128.0) + step(128.0, rgba[2]) - 127.0;\n    highp float Mantissa = mod(rgba[2], 128.0) * 65536.0 + rgba[1] * 256.0 + rgba[0] + 8388608.0;\n    return Sign * exp2(Exponent - 23.0) * Mantissa;\n  }\n#endif\n\n#if CC_USE_SKINNING == 1\n  void getJointDQ(float i, out vec4 Qr, out vec4 Qt, out vec3 S) {\n    highp float j = 12.0 * (cc_jointsAnimInfo.x * i + cc_jointsAnimInfo.y) + cc_jointsTextureInfo.z;\n    highp float invSize = cc_jointsTextureInfo.y;\n    highp float y = floor(j * invSize);\n    highp float x = j - y * cc_jointsTextureInfo.x;\n    y = (y + 0.5) * invSize;\n    Qr = vec4(\n      decode32(texture(cc_jointsTexture, vec2((x + 0.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 1.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 2.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 3.5) * invSize, y)))\n    );\n    Qt = vec4(\n      decode32(texture(cc_jointsTexture, vec2((x + 4.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 5.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 6.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 7.5) * invSize, y)))\n    );\n    S = vec3(\n      decode32(texture(cc_jointsTexture, vec2((x + 8.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 9.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 10.5) * invSize, y)))\n    );\n  }\n#elif CC_USE_SKINNING == 2\n  void getJointDQ(float i, out vec4 Qr, out vec4 Qt, out vec3 S) {\n    highp float j = 3.0 * (cc_jointsAnimInfo.x * i + cc_jointsAnimInfo.y) + cc_jointsTextureInfo.z;\n    highp float invSize = cc_jointsTextureInfo.y;\n    highp float y = floor(j * invSize);\n    highp float x = j - y * cc_jointsTextureInfo.x;\n    y = (y + 0.5) * invSize;\n    Qr = texture(cc_jointsTexture, vec2((x + 0.5) * invSize, y));\n    Qt = texture(cc_jointsTexture, vec2((x + 1.5) * invSize, y));\n    S = texture(cc_jointsTexture, vec2((x + 2.5) * invSize, y)).xyz;\n  }\n#endif\nvoid skinRTS(out vec4 R, out vec3 T, out vec3 S) {\n  vec4 r, t, Qt = vec4(0.0); vec3 s;\n  R = vec4(0.0); S = vec3(0.0);\n\n  for (int i = 0; i < 4; i++) {\n    float w = a_weights[i];\n    getJointDQ(a_joints[i], r, t, s);\n    S += s * w; R += r * w; Qt += t * w;\n  }\n\n  float invNorm = 1.0 / length(R); R *= invNorm; Qt *= invNorm;\n  T = 2.0 * (R.w * Qt.xyz - Qt.w * R.xyz + cross(R.xyz, Qt.xyz));\n}\n\nvec3 VectorTransformQuat(vec3 v, vec4 Q) {\n  return v + 2.0 * cross(Q.xyz, cross(Q.xyz, v) + Q.w * v);\n}\n\nvoid CCSkin(inout vec4 position) {\n  vec4 R; vec3 T, S;\n  skinRTS(R, T, S);\n  position.xyz = VectorTransformQuat(position.xyz * S, R) + T;\n}\n\nvoid CCSkin(inout StandardAttributes attr) {\n  vec4 R; vec3 T, S;\n  skinRTS(R, T, S);\n  attr.position.xyz = VectorTransformQuat(attr.position.xyz * S, R) + T;\n  attr.normal = VectorTransformQuat(attr.normal, R);\n  attr.tangent.xyz = VectorTransformQuat(attr.tangent.xyz, R);\n}\n\n#endif\n\nstruct StandardVertInput {\n  highp vec4 position;\n  vec3 normal;\n  vec4 tangent;\n  int index;\n};\n\nvoid CCAttrToInput (in StandardAttributes attr, out StandardVertInput In) {\n  In.position = attr.position;\n  In.normal = attr.normal;\n  In.tangent = attr.tangent;\n  In.index = attr.index;\n}\n\nvoid CCVertInput (out StandardVertInput In) {\n  StandardAttributes attr;\n  CCDecode(attr);\n  #if CC_USE_SKINNING\n    CCSkin(attr);\n  #endif\n  CCAttrToInput(attr, In);\n}\n\nin vec2 a_texCoord;\nout vec2 v_uv;\n\nuniform OutlineVert {\n  vec4 outlineParams;\n};\n\nhighp vec4 vert () {\n  StandardVertInput In;\n  CCVertInput(In);\n\n  highp mat4 matWorld;\n  CCGetWorldMatrix(matWorld);\n\n  float width = outlineParams.x * 0.001;\n\n  #if USE_POSITION_SCALING\n    vec3 dir = normalize(In.position.xyz);\n    float flip = dot(dir, normalize(In.normal)) < 0.0 ? -1.0 : 1.0;\n    In.position.xyz += flip * dir * width * 2.0;\n    highp vec4 pos = cc_matProj * (cc_matView * matWorld) * In.position;\n  #else\n    In.position.xyz += normalize(In.normal) * width;\n    highp vec4 pos = cc_matProj * (cc_matView * matWorld) * In.position;\n  #endif\n\n  pos.z -= outlineParams.y * 0.002;\n\n  v_uv = a_texCoord;\n\n  return pos;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision highp float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec4 CCFragOutput(vec4 color) {\n  #if CC_USE_HDR\n    color.rgb = mix(color.rgb, SRGBToLinear(color.rgb) * cc_exposure.w, vec3(cc_exposure.z));\n\t#endif\n\treturn color;\n}\n\nin vec2 v_uv;\n\nuniform OutlineFrag {\n  vec4 baseColor;\n};\n\n#if USE_BASE_COLOR_MAP\n  uniform sampler2D baseColorMap;\n#endif\n\nvec4 frag () {\n  vec4 color = baseColor * cc_mainLitColor;\n  #if USE_BASE_COLOR_MAP\n    vec4 texColor = texture(baseColorMap, v_uv);\n    texColor.rgb = SRGBToLinear(texColor.rgb);\n    color *= texColor;\n  #endif\n\n  return CCFragOutput(vec4(color.rgb, 1.0));\n}\n\nout vec4 cc_FragColor;\nvoid main() { cc_FragColor = frag(); }\n"
+      },
+      "glsl1": {
+        "vert": "\nprecision highp float;\nuniform mat4 cc_matView;\nuniform mat4 cc_matProj;\n\n#if CC_USE_BATCHING\n  attribute float a_dyn_batch_id;\n  uniform highp mat4 cc_matWorlds[10];\n\n#else\nuniform highp mat4 cc_matWorld;\nuniform highp mat4 cc_matWorldIT;\n\n#endif\n\nvoid CCGetWorldMatrix (out highp mat4 matWorld) {\n  #if CC_USE_BATCHING\n    matWorld = cc_matWorlds[int(a_dyn_batch_id + 0.5)];\n  #else\n    matWorld = cc_matWorld;\n  #endif\n}\n\nvoid CCGetWorldMatrixFull (out highp mat4 matWorld, out highp mat4 matWorldIT) {\n  #if CC_USE_BATCHING\n    matWorld = cc_matWorlds[int(a_dyn_batch_id + 0.5)];\n    matWorldIT = matWorld;\n  #else\n    matWorld = cc_matWorld;\n    matWorldIT = cc_matWorldIT;\n  #endif\n}\n\nstruct StandardAttributes {\n  vec4 position;\n  vec3 normal;\n  vec4 tangent;\n  int index;\n};\n\nattribute vec3 a_position;\nattribute vec3 a_normal;\nattribute vec4 a_tangent;\n\nvoid CCDecode (out StandardAttributes attr) {\n  attr.position = vec4(a_position, 1.0);\n  attr.normal = a_normal;\n  attr.tangent = a_tangent;\n}\n\n#if CC_USE_SKINNING\n\nattribute vec4 a_weights;\nattribute vec4 a_joints;\nuniform highp vec4 cc_jointsTextureInfo;\nuniform highp vec4 cc_jointsAnimInfo;\nuniform sampler2D cc_jointsTexture;\n\n#if CC_USE_SKINNING == 1\n  highp float decode32(highp vec4 rgba) {\n    rgba = rgba * 255.0;\n    highp float Sign = 1.0 - step(128.0, rgba[3]) * 2.0;\n    highp float Exponent = 2.0 * mod(rgba[3], 128.0) + step(128.0, rgba[2]) - 127.0;\n    highp float Mantissa = mod(rgba[2], 128.0) * 65536.0 + rgba[1] * 256.0 + rgba[0] + 8388608.0;\n    return Sign * exp2(Exponent - 23.0) * Mantissa;\n  }\n#endif\n\n#if CC_USE_SKINNING == 1\n  void getJointDQ(float i, out vec4 Qr, out vec4 Qt, out vec3 S) {\n    highp float j = 12.0 * (cc_jointsAnimInfo.x * i + cc_jointsAnimInfo.y) + cc_jointsTextureInfo.z;\n    highp float invSize = cc_jointsTextureInfo.y;\n    highp float y = floor(j * invSize);\n    highp float x = j - y * cc_jointsTextureInfo.x;\n    y = (y + 0.5) * invSize;\n    Qr = vec4(\n      decode32(texture2D(cc_jointsTexture, vec2((x + 0.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 1.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 2.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 3.5) * invSize, y)))\n    );\n    Qt = vec4(\n      decode32(texture2D(cc_jointsTexture, vec2((x + 4.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 5.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 6.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 7.5) * invSize, y)))\n    );\n    S = vec3(\n      decode32(texture2D(cc_jointsTexture, vec2((x + 8.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 9.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 10.5) * invSize, y)))\n    );\n  }\n#elif CC_USE_SKINNING == 2\n  void getJointDQ(float i, out vec4 Qr, out vec4 Qt, out vec3 S) {\n    highp float j = 3.0 * (cc_jointsAnimInfo.x * i + cc_jointsAnimInfo.y) + cc_jointsTextureInfo.z;\n    highp float invSize = cc_jointsTextureInfo.y;\n    highp float y = floor(j * invSize);\n    highp float x = j - y * cc_jointsTextureInfo.x;\n    y = (y + 0.5) * invSize;\n    Qr = texture2D(cc_jointsTexture, vec2((x + 0.5) * invSize, y));\n    Qt = texture2D(cc_jointsTexture, vec2((x + 1.5) * invSize, y));\n    S = texture2D(cc_jointsTexture, vec2((x + 2.5) * invSize, y)).xyz;\n  }\n#endif\nvoid skinRTS(out vec4 R, out vec3 T, out vec3 S) {\n  vec4 r, t, Qt = vec4(0.0); vec3 s;\n  R = vec4(0.0); S = vec3(0.0);\n\n  for (int i = 0; i < 4; i++) {\n    float w = a_weights[i];\n    getJointDQ(a_joints[i], r, t, s);\n    S += s * w; R += r * w; Qt += t * w;\n  }\n\n  float invNorm = 1.0 / length(R); R *= invNorm; Qt *= invNorm;\n  T = 2.0 * (R.w * Qt.xyz - Qt.w * R.xyz + cross(R.xyz, Qt.xyz));\n}\n\nvec3 VectorTransformQuat(vec3 v, vec4 Q) {\n  return v + 2.0 * cross(Q.xyz, cross(Q.xyz, v) + Q.w * v);\n}\n\nvoid CCSkin(inout vec4 position) {\n  vec4 R; vec3 T, S;\n  skinRTS(R, T, S);\n  position.xyz = VectorTransformQuat(position.xyz * S, R) + T;\n}\n\nvoid CCSkin(inout StandardAttributes attr) {\n  vec4 R; vec3 T, S;\n  skinRTS(R, T, S);\n  attr.position.xyz = VectorTransformQuat(attr.position.xyz * S, R) + T;\n  attr.normal = VectorTransformQuat(attr.normal, R);\n  attr.tangent.xyz = VectorTransformQuat(attr.tangent.xyz, R);\n}\n\n#endif\n\nstruct StandardVertInput {\n  highp vec4 position;\n  vec3 normal;\n  vec4 tangent;\n  int index;\n};\n\nvoid CCAttrToInput (in StandardAttributes attr, out StandardVertInput In) {\n  In.position = attr.position;\n  In.normal = attr.normal;\n  In.tangent = attr.tangent;\n  In.index = attr.index;\n}\n\nvoid CCVertInput (out StandardVertInput In) {\n  StandardAttributes attr;\n  CCDecode(attr);\n  #if CC_USE_SKINNING\n    CCSkin(attr);\n  #endif\n  CCAttrToInput(attr, In);\n}\n\nattribute vec2 a_texCoord;\nvarying vec2 v_uv;\n\nuniform vec4 outlineParams;\n\nhighp vec4 vert () {\n  StandardVertInput In;\n  CCVertInput(In);\n\n  highp mat4 matWorld;\n  CCGetWorldMatrix(matWorld);\n\n  float width = outlineParams.x * 0.001;\n\n  #if USE_POSITION_SCALING\n    vec3 dir = normalize(In.position.xyz);\n    float flip = dot(dir, normalize(In.normal)) < 0.0 ? -1.0 : 1.0;\n    In.position.xyz += flip * dir * width * 2.0;\n    highp vec4 pos = cc_matProj * (cc_matView * matWorld) * In.position;\n  #else\n    In.position.xyz += normalize(In.normal) * width;\n    highp vec4 pos = cc_matProj * (cc_matView * matWorld) * In.position;\n  #endif\n\n  pos.z -= outlineParams.y * 0.002;\n\n  v_uv = a_texCoord;\n\n  return pos;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision highp float;\nuniform vec4 cc_exposure;\nuniform vec4 cc_mainLitColor;\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec4 CCFragOutput(vec4 color) {\n  #if CC_USE_HDR\n    color.rgb = mix(color.rgb, SRGBToLinear(color.rgb) * cc_exposure.w, vec3(cc_exposure.z));\n\t#endif\n\treturn color;\n}\n\nvarying vec2 v_uv;\n\nuniform vec4 baseColor;\n\n#if USE_BASE_COLOR_MAP\n  uniform sampler2D baseColorMap;\n#endif\n\nvec4 frag () {\n  vec4 color = baseColor * cc_mainLitColor;\n  #if USE_BASE_COLOR_MAP\n    vec4 texColor = texture2D(baseColorMap, v_uv);\n    texColor.rgb = SRGBToLinear(texColor.rgb);\n    color *= texColor;\n  #endif\n\n  return CCFragOutput(vec4(color.rgb, 1.0));\n}\n\nvoid main() { gl_FragColor = frag(); }\n"
+      },
+      "builtins": {
+        "globals": {
+          "blocks": [
+            {
+              "name": "CCGlobal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        },
+        "locals": {
+          "blocks": [
+            {
+              "name": "CCLocalBatched",
+              "defines": [
+                "CC_USE_BATCHING"
+              ]
+            },
+            {
+              "name": "CCLocal",
+              "defines": []
+            },
+            {
+              "name": "CCSkinningTexture",
+              "defines": [
+                "CC_USE_SKINNING"
+              ]
+            },
+            {
+              "name": "CCSkinningAnimation",
+              "defines": [
+                "CC_USE_SKINNING"
+              ]
+            }
+          ],
+          "samplers": [
+            {
+              "name": "cc_jointsTexture",
+              "defines": [
+                "CC_USE_SKINNING"
+              ]
+            }
+          ]
+        }
+      },
+      "defines": [
+        {
+          "name": "CC_USE_BATCHING",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "CC_USE_SKINNING",
+          "type": "number",
+          "defines": [],
+          "range": [
+            0,
+            2
+          ]
+        },
+        {
+          "name": "USE_POSITION_SCALING",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "CC_USE_HDR",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "USE_BASE_COLOR_MAP",
+          "type": "boolean",
+          "defines": []
+        }
+      ],
+      "blocks": [
+        {
+          "name": "OutlineVert",
+          "members": [
+            {
+              "name": "outlineParams",
+              "type": 16,
+              "count": 1
+            }
+          ],
+          "defines": [],
+          "binding": 0
+        },
+        {
+          "name": "OutlineFrag",
+          "members": [
+            {
+              "name": "baseColor",
+              "type": 16,
+              "count": 1
+            }
+          ],
+          "defines": [],
+          "binding": 1
+        }
+      ],
+      "samplers": [
+        {
+          "name": "baseColorMap",
+          "type": 28,
+          "count": 1,
+          "defines": [
+            "USE_BASE_COLOR_MAP"
+          ],
+          "binding": 30
+        }
+      ],
+      "name": "builtin-toon|outline-vs:vert|outline-fs:frag"
+    },
+    {
+      "hash": 2087787892,
+      "glsl3": {
+        "vert": "\nprecision highp float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\n#if CC_USE_BATCHING\n  in float a_dyn_batch_id;\n  uniform CCLocalBatched {\n    highp mat4 cc_matWorlds[10];\n  };\n#else\nuniform CCLocal {\n  highp mat4 cc_matWorld;\n  highp mat4 cc_matWorldIT;\n};\n\n#endif\n\nvoid CCGetWorldMatrix (out highp mat4 matWorld) {\n  #if CC_USE_BATCHING\n    matWorld = cc_matWorlds[int(a_dyn_batch_id + 0.5)];\n  #else\n    matWorld = cc_matWorld;\n  #endif\n}\n\nvoid CCGetWorldMatrixFull (out highp mat4 matWorld, out highp mat4 matWorldIT) {\n  #if CC_USE_BATCHING\n    matWorld = cc_matWorlds[int(a_dyn_batch_id + 0.5)];\n    matWorldIT = matWorld;\n  #else\n    matWorld = cc_matWorld;\n    matWorldIT = cc_matWorldIT;\n  #endif\n}\n\nstruct StandardAttributes {\n  vec4 position;\n  vec3 normal;\n  vec4 tangent;\n  int index;\n};\n\nin vec3 a_position;\nin vec3 a_normal;\nin vec4 a_tangent;\n\nvoid CCDecode (out StandardAttributes attr) {\n  attr.position = vec4(a_position, 1.0);\n  attr.normal = a_normal;\n  attr.tangent = a_tangent;\n}\n\n#if CC_USE_SKINNING\n\nin vec4 a_weights;\nin vec4 a_joints;\nuniform CCSkinningTexture {\n  highp vec4 cc_jointsTextureInfo;\n};\nuniform CCSkinningAnimation {\n  highp vec4 cc_jointsAnimInfo;\n};\nuniform sampler2D cc_jointsTexture;\n\n#if CC_USE_SKINNING == 1\n  highp float decode32(highp vec4 rgba) {\n    rgba = rgba * 255.0;\n    highp float Sign = 1.0 - step(128.0, rgba[3]) * 2.0;\n    highp float Exponent = 2.0 * mod(rgba[3], 128.0) + step(128.0, rgba[2]) - 127.0;\n    highp float Mantissa = mod(rgba[2], 128.0) * 65536.0 + rgba[1] * 256.0 + rgba[0] + 8388608.0;\n    return Sign * exp2(Exponent - 23.0) * Mantissa;\n  }\n#endif\n\n#if CC_USE_SKINNING == 1\n  void getJointDQ(float i, out vec4 Qr, out vec4 Qt, out vec3 S) {\n    highp float j = 12.0 * (cc_jointsAnimInfo.x * i + cc_jointsAnimInfo.y) + cc_jointsTextureInfo.z;\n    highp float invSize = cc_jointsTextureInfo.y;\n    highp float y = floor(j * invSize);\n    highp float x = j - y * cc_jointsTextureInfo.x;\n    y = (y + 0.5) * invSize;\n    Qr = vec4(\n      decode32(texture(cc_jointsTexture, vec2((x + 0.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 1.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 2.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 3.5) * invSize, y)))\n    );\n    Qt = vec4(\n      decode32(texture(cc_jointsTexture, vec2((x + 4.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 5.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 6.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 7.5) * invSize, y)))\n    );\n    S = vec3(\n      decode32(texture(cc_jointsTexture, vec2((x + 8.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 9.5) * invSize, y))),\n      decode32(texture(cc_jointsTexture, vec2((x + 10.5) * invSize, y)))\n    );\n  }\n#elif CC_USE_SKINNING == 2\n  void getJointDQ(float i, out vec4 Qr, out vec4 Qt, out vec3 S) {\n    highp float j = 3.0 * (cc_jointsAnimInfo.x * i + cc_jointsAnimInfo.y) + cc_jointsTextureInfo.z;\n    highp float invSize = cc_jointsTextureInfo.y;\n    highp float y = floor(j * invSize);\n    highp float x = j - y * cc_jointsTextureInfo.x;\n    y = (y + 0.5) * invSize;\n    Qr = texture(cc_jointsTexture, vec2((x + 0.5) * invSize, y));\n    Qt = texture(cc_jointsTexture, vec2((x + 1.5) * invSize, y));\n    S = texture(cc_jointsTexture, vec2((x + 2.5) * invSize, y)).xyz;\n  }\n#endif\nvoid skinRTS(out vec4 R, out vec3 T, out vec3 S) {\n  vec4 r, t, Qt = vec4(0.0); vec3 s;\n  R = vec4(0.0); S = vec3(0.0);\n\n  for (int i = 0; i < 4; i++) {\n    float w = a_weights[i];\n    getJointDQ(a_joints[i], r, t, s);\n    S += s * w; R += r * w; Qt += t * w;\n  }\n\n  float invNorm = 1.0 / length(R); R *= invNorm; Qt *= invNorm;\n  T = 2.0 * (R.w * Qt.xyz - Qt.w * R.xyz + cross(R.xyz, Qt.xyz));\n}\n\nvec3 VectorTransformQuat(vec3 v, vec4 Q) {\n  return v + 2.0 * cross(Q.xyz, cross(Q.xyz, v) + Q.w * v);\n}\n\nvoid CCSkin(inout vec4 position) {\n  vec4 R; vec3 T, S;\n  skinRTS(R, T, S);\n  position.xyz = VectorTransformQuat(position.xyz * S, R) + T;\n}\n\nvoid CCSkin(inout StandardAttributes attr) {\n  vec4 R; vec3 T, S;\n  skinRTS(R, T, S);\n  attr.position.xyz = VectorTransformQuat(attr.position.xyz * S, R) + T;\n  attr.normal = VectorTransformQuat(attr.normal, R);\n  attr.tangent.xyz = VectorTransformQuat(attr.tangent.xyz, R);\n}\n\n#endif\n\nstruct StandardVertInput {\n  highp vec4 position;\n  vec3 normal;\n  vec4 tangent;\n  int index;\n};\n\nvoid CCAttrToInput (in StandardAttributes attr, out StandardVertInput In) {\n  In.position = attr.position;\n  In.normal = attr.normal;\n  In.tangent = attr.tangent;\n  In.index = attr.index;\n}\n\nvoid CCVertInput (out StandardVertInput In) {\n  StandardAttributes attr;\n  CCDecode(attr);\n  #if CC_USE_SKINNING\n    CCSkin(attr);\n  #endif\n  CCAttrToInput(attr, In);\n}\n\nin vec2 a_texCoord;\nout vec3 v_position;\nout vec2 v_uv;\nout vec3 v_normal;\n#if USE_NORMAL_MAP\n  out vec3 v_tangent;\n  out vec3 v_bitangent;\n#endif\n\nuniform ToonVert {\n  vec4 tilingOffset;\n};\n\nhighp vec4 vert () {\n  StandardVertInput In;\n  CCVertInput(In);\n\n  highp mat4 matWorld, matWorldIT;\n  CCGetWorldMatrixFull(matWorld, matWorldIT);\n\n  highp vec4 pos = matWorld * In.position;\n  v_position = pos.xyz;\n  v_uv = a_texCoord * tilingOffset.xy + tilingOffset.zw;\n\n  v_normal = (matWorldIT * vec4(In.normal, 0.0)).xyz;\n  #if USE_NORMAL_MAP\n    v_tangent = normalize((matWorldIT * vec4(In.tangent.xyz, 0.0)).xyz);\n    v_bitangent = cross(v_normal, v_tangent) * In.tangent.w;\n  #endif\n\n  return cc_matProj * (cc_matView * matWorld) * In.position;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision highp float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\n#define saturate(a) clamp( a, 0.0, 1.0 )\nuniform CCForwardLight {\n  highp vec4 cc_sphereLitPos[2];\n  vec4 cc_sphereLitSizeRange[2];\n  vec4 cc_sphereLitColor[2];\n  highp vec4 cc_spotLitPos[2];\n  vec4 cc_spotLitSizeRangeAngle[2];\n  vec4 cc_spotLitDir[2];\n  vec4 cc_spotLitColor[2];\n};\n\nfloat SmoothDistAtt2(float distSqr, float invSqrAttRadius) {\n  float factor = distSqr * invSqrAttRadius;\n  float factor2 = factor * factor;\n  float factor3 = factor2 * factor2;\n  float smoothFactor = clamp(1.0 - factor3 * factor3, 0.0, 1.0);\n  return smoothFactor * smoothFactor;\n}\n\nfloat SmoothDistAtt(float distSqr, float invSqrAttRadius) {\n  float factor = distSqr * invSqrAttRadius;\n  float smoothFactor = clamp(1.0 - factor * factor, 0.0, 1.0);\n  return smoothFactor * smoothFactor;\n}\n\nfloat GetDistAtt(float distSqr, float invSqrAttRadius) {\n  float attenuation = 1.0 / max(distSqr, 0.01*0.01);\n  attenuation *= SmoothDistAtt(distSqr , invSqrAttRadius);\n  return attenuation;\n}\n\nfloat GetAngleAtt(vec3 L, vec3 litDir, float litAngleScale, float litAngleOffset) {\n  float cd = dot(litDir, L);\n  float attenuation = clamp(cd * litAngleScale + litAngleOffset, 0.0, 1.0);\n  return (attenuation * attenuation);\n}\n\nstruct ToonSurface {\n  vec4 baseColor;\n  vec4 specular;\n  vec3 position;\n  vec3 normal;\n  vec3 shade1;\n  vec3 shade2;\n  vec3 emissive;\n  float baseStep;\n  float baseFeather;\n  float shadeStep;\n  float shadeFeather;\n};\nvec4 CCToonShading (ToonSurface s) {\n  vec3 V = normalize(cc_cameraPos.xyz - s.position);\n  vec3 N = s.normal;\n\n  vec3 L = normalize(-cc_mainLitDir.xyz);\n  float NL = 0.5 * dot(N, L) + 0.5;\n  float NH = 0.5 * dot(normalize(V + L), N) + 0.5;\n  vec3 lightColor = cc_mainLitColor.rgb * cc_mainLitColor.w * s.baseStep;\n\n  vec3 diffuse = mix(s.shade1, s.shade2,\n    clamp(1.0 + (s.shadeStep - s.shadeFeather - NL) / s.shadeFeather, 0.0, 1.0));\n  diffuse = mix(s.baseColor.rgb, diffuse,\n    clamp(1.0 + (s.baseStep - s.baseFeather - NL) / s.baseFeather, 0.0, 1.0));\n\n  float specularWeight = 1.0 - pow(s.specular.a, 5.0);\n  float specularMask = step(specularWeight, NH);\n  vec3 specular = s.specular.rgb * specularMask;\n\n  vec3 finalColor = lightColor * (diffuse + specular);\n  for (int i = 0; i < 2; i++) {\n    vec3 PLU = cc_sphereLitPos[i].xyz - s.position;\n    vec3 PL = normalize(PLU);\n    vec3 PH = normalize(PL + V);\n    float PNL = 0.5 * dot(N, PL) + 0.5;\n    float PNH = 0.5 * dot(N, PH) + 0.5;\n\n    float distSqr = dot(PLU, PLU);\n    float litRadius = cc_sphereLitSizeRange[i].x;\n    float litRadiusSqr = litRadius * litRadius;\n    float illum = litRadiusSqr / max(litRadiusSqr , distSqr);\n    float attRadiusSqrInv = 1.0 / max(cc_sphereLitSizeRange[i].y, 0.01);\n    attRadiusSqrInv *= attRadiusSqrInv;\n    float att = GetDistAtt(distSqr, attRadiusSqrInv);\n    vec3 lightColor = PNL * cc_sphereLitColor[i].rgb * cc_sphereLitColor[i].a * illum * att * s.baseStep;\n\n    vec3 diffuse = mix(s.shade1, s.shade2,\n      clamp(1.0 + (s.shadeStep - s.shadeFeather - PNL) / s.shadeFeather, 0.0, 1.0));\n    diffuse = mix(s.baseColor.rgb, diffuse,\n      clamp(1.0 + (s.baseStep - s.baseFeather - PNL) / s.baseFeather, 0.0, 1.0));\n\n    float specularMask = step(specularWeight, PNH);\n    vec3 specular = s.specular.rgb * specularMask;\n\n    finalColor += lightColor * (diffuse + specular);\n  }\n  for (int i = 0; i < 2; i++) {\n    vec3 SLU = cc_spotLitPos[i].xyz - s.position;\n    vec3 SL = normalize(SLU);\n    vec3 SH = normalize(SL + V);\n    float SNL = 0.5 * dot(N, SL) + 0.5;\n    float SNH = 0.5 * dot(N, SH) + 0.5;\n\n    float distSqr = dot(SLU, SLU);\n    float litRadius = cc_spotLitSizeRangeAngle[i].x;\n    float litRadiusSqr = litRadius * litRadius;\n    float illum = litRadiusSqr / max(litRadiusSqr , distSqr);\n    float attRadiusSqrInv = 1.0 / max(cc_spotLitSizeRangeAngle[i].y, 0.01);\n    attRadiusSqrInv *= attRadiusSqrInv;\n\n    float cosInner = max(dot(-cc_spotLitDir[i].xyz, SL), 0.01);\n    float cosOuter = cc_spotLitSizeRangeAngle[i].z;\n    float litAngleScale = 1.0 / max(0.001, cosInner - cosOuter);\n    float litAngleOffset = -cosOuter * litAngleScale;\n    float att = GetDistAtt(distSqr, attRadiusSqrInv);\n    att *= GetAngleAtt(SL, -cc_spotLitDir[i].xyz, litAngleScale, litAngleOffset);\n\n    lightColor = SNL * cc_spotLitColor[i].rgb * cc_spotLitColor[i].w * illum * att * s.baseStep;\n\n    vec3 diffuse = mix(s.shade1, s.shade2,\n      clamp(1.0 + (s.shadeStep - s.shadeFeather - SNL) / s.shadeFeather, 0.0, 1.0));\n    diffuse = mix(s.baseColor.rgb, diffuse,\n      clamp(1.0 + (s.baseStep - s.baseFeather - SNL) / s.baseFeather, 0.0, 1.0));\n\n    float specularMask = step(specularWeight, SNH);\n    vec3 specular = s.specular.rgb * specularMask;\n\n    finalColor += lightColor * (diffuse + specular);\n  }\n\n  #if CC_USE_HDR\n    s.emissive *= cc_exposure.w;\n  #endif\n  finalColor += s.emissive;\n\n  return vec4(finalColor, s.baseColor.a);\n}\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec3 ACESToneMap(vec3 color) {\n    const float A = 2.51;\n    const float B = 0.03;\n    const float C = 2.43;\n    const float D = 0.59;\n    const float E = 0.14;\n    return (color * (A * color + B)) / (color * (C * color + D) + E);\n}\n\nvec4 CCFragOutput (vec4 color) {\n  #if !CC_USE_HDR\n    color.rgb = ACESToneMap(color.rgb);\n    color.rgb = LinearToSRGB(color.rgb);\n  #endif\n  return color;\n}\n\nin vec3 v_position;\nin vec2 v_uv;\n\nin vec3 v_normal;\n#if USE_NORMAL_MAP\n  in vec3 v_tangent;\n  in vec3 v_bitangent;\n  uniform sampler2D normalMap;\n#endif\n\n#if USE_BASE_COLOR_MAP\n  uniform sampler2D baseColorMap;\n#endif\n#if USE_1ST_SHADE_MAP\n  uniform sampler2D shadeMap1;\n#endif\n#if USE_2ND_SHADE_MAP\n  uniform sampler2D shadeMap2;\n#endif\n#if USE_SPECULAR_MAP\n  uniform sampler2D specularMap;\n#endif\n#if USE_EMISSIVE_MAP\n  uniform sampler2D emissiveMap;\n#endif\n\nuniform ToonFrag {\n  vec4 baseColor;\n  vec4 colorScale;\n  vec4 shadeColor1;\n  vec4 shadeColor2;\n  vec4 specular;\n  vec4 shadeParams;\n  vec4 emissive;\n  vec4 emissiveScale;\n};\n\n#if USE_ALPHA_TEST\n#endif\n\nvoid surf (out ToonSurface s) {\n  s.shade2 = shadeColor2.rgb * colorScale.rgb;\n  #if USE_2ND_SHADE_MAP\n    s.shade2 *= SRGBToLinear(texture(shadeMap2, v_uv).rgb);\n  #endif\n  s.shade1 = shadeColor1.rgb * colorScale.rgb;\n  #if USE_1ST_SHADE_MAP\n    s.shade1 *= SRGBToLinear(texture(shadeMap1, v_uv).rgb);\n    #if SHADE_MAP_1_AS_SHADE_MAP_2\n      s.shade2 *= s.shade1.rgb;\n    #endif\n  #endif\n\n  vec4 baseColor = baseColor;\n  #if USE_BASE_COLOR_MAP\n    vec4 baseColorMap = texture(baseColorMap, v_uv);\n    baseColorMap.rgb = SRGBToLinear(baseColorMap.rgb);\n    baseColor *= baseColorMap;\n    #if BASE_COLOR_MAP_AS_SHADE_MAP_1\n      s.shade1 *= baseColorMap.rgb;\n    #endif\n    #if BASE_COLOR_MAP_AS_SHADE_MAP_2\n      s.shade2 *= baseColorMap.rgb;\n    #endif\n  #endif\n  s.baseColor = baseColor;\n  s.baseColor.rgb *= colorScale.xyz;\n\n  #if USE_ALPHA_TEST\n    if (s.baseColor.ALPHA_TEST_CHANNEL < baseColorScale.w) discard;\n  #endif\n\n  s.normal = normalize(v_normal);\n  #if USE_NORMAL_MAP\n    vec3 nmmp = texture(normalMap, v_uv).xyz - vec3(0.5);\n    s.normal = normalize(\n      nmmp.x * normalize(v_tangent) +\n      nmmp.y * normalize(v_bitangent) +\n      nmmp.z * s.normal);\n  #endif\n\n  s.position = v_position;\n\n  s.specular = specular;\n  #if USE_SPECULAR_MAP\n    s.specular.rgb *= SRGBToLinear(texture(specularMap, v_uv).rgb);\n  #endif\n\n  s.emissive = emissive.rgb * emissiveScale.xyz;\n  #if USE_EMISSIVE_MAP\n    s.emissive *= SRGBToLinear(texture(emissiveMap, v_uv).rgb);\n  #endif\n\n  s.baseStep = shadeParams.x;\n  s.baseFeather = shadeParams.y;\n  s.shadeStep = shadeParams.z;\n  s.shadeFeather = shadeParams.w;\n}\n\nvec4 frag () {\n  ToonSurface s; surf(s);\n  vec4 color = CCToonShading(s);\n  return CCFragOutput(color);\n}\n\nout vec4 cc_FragColor;\nvoid main() { cc_FragColor = frag(); }\n"
+      },
+      "glsl1": {
+        "vert": "\nprecision highp float;\nuniform mat4 cc_matView;\nuniform mat4 cc_matProj;\n\n#if CC_USE_BATCHING\n  attribute float a_dyn_batch_id;\n  uniform highp mat4 cc_matWorlds[10];\n\n#else\nuniform highp mat4 cc_matWorld;\nuniform highp mat4 cc_matWorldIT;\n\n#endif\n\nvoid CCGetWorldMatrix (out highp mat4 matWorld) {\n  #if CC_USE_BATCHING\n    matWorld = cc_matWorlds[int(a_dyn_batch_id + 0.5)];\n  #else\n    matWorld = cc_matWorld;\n  #endif\n}\n\nvoid CCGetWorldMatrixFull (out highp mat4 matWorld, out highp mat4 matWorldIT) {\n  #if CC_USE_BATCHING\n    matWorld = cc_matWorlds[int(a_dyn_batch_id + 0.5)];\n    matWorldIT = matWorld;\n  #else\n    matWorld = cc_matWorld;\n    matWorldIT = cc_matWorldIT;\n  #endif\n}\n\nstruct StandardAttributes {\n  vec4 position;\n  vec3 normal;\n  vec4 tangent;\n  int index;\n};\n\nattribute vec3 a_position;\nattribute vec3 a_normal;\nattribute vec4 a_tangent;\n\nvoid CCDecode (out StandardAttributes attr) {\n  attr.position = vec4(a_position, 1.0);\n  attr.normal = a_normal;\n  attr.tangent = a_tangent;\n}\n\n#if CC_USE_SKINNING\n\nattribute vec4 a_weights;\nattribute vec4 a_joints;\nuniform highp vec4 cc_jointsTextureInfo;\nuniform highp vec4 cc_jointsAnimInfo;\nuniform sampler2D cc_jointsTexture;\n\n#if CC_USE_SKINNING == 1\n  highp float decode32(highp vec4 rgba) {\n    rgba = rgba * 255.0;\n    highp float Sign = 1.0 - step(128.0, rgba[3]) * 2.0;\n    highp float Exponent = 2.0 * mod(rgba[3], 128.0) + step(128.0, rgba[2]) - 127.0;\n    highp float Mantissa = mod(rgba[2], 128.0) * 65536.0 + rgba[1] * 256.0 + rgba[0] + 8388608.0;\n    return Sign * exp2(Exponent - 23.0) * Mantissa;\n  }\n#endif\n\n#if CC_USE_SKINNING == 1\n  void getJointDQ(float i, out vec4 Qr, out vec4 Qt, out vec3 S) {\n    highp float j = 12.0 * (cc_jointsAnimInfo.x * i + cc_jointsAnimInfo.y) + cc_jointsTextureInfo.z;\n    highp float invSize = cc_jointsTextureInfo.y;\n    highp float y = floor(j * invSize);\n    highp float x = j - y * cc_jointsTextureInfo.x;\n    y = (y + 0.5) * invSize;\n    Qr = vec4(\n      decode32(texture2D(cc_jointsTexture, vec2((x + 0.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 1.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 2.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 3.5) * invSize, y)))\n    );\n    Qt = vec4(\n      decode32(texture2D(cc_jointsTexture, vec2((x + 4.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 5.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 6.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 7.5) * invSize, y)))\n    );\n    S = vec3(\n      decode32(texture2D(cc_jointsTexture, vec2((x + 8.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 9.5) * invSize, y))),\n      decode32(texture2D(cc_jointsTexture, vec2((x + 10.5) * invSize, y)))\n    );\n  }\n#elif CC_USE_SKINNING == 2\n  void getJointDQ(float i, out vec4 Qr, out vec4 Qt, out vec3 S) {\n    highp float j = 3.0 * (cc_jointsAnimInfo.x * i + cc_jointsAnimInfo.y) + cc_jointsTextureInfo.z;\n    highp float invSize = cc_jointsTextureInfo.y;\n    highp float y = floor(j * invSize);\n    highp float x = j - y * cc_jointsTextureInfo.x;\n    y = (y + 0.5) * invSize;\n    Qr = texture2D(cc_jointsTexture, vec2((x + 0.5) * invSize, y));\n    Qt = texture2D(cc_jointsTexture, vec2((x + 1.5) * invSize, y));\n    S = texture2D(cc_jointsTexture, vec2((x + 2.5) * invSize, y)).xyz;\n  }\n#endif\nvoid skinRTS(out vec4 R, out vec3 T, out vec3 S) {\n  vec4 r, t, Qt = vec4(0.0); vec3 s;\n  R = vec4(0.0); S = vec3(0.0);\n\n  for (int i = 0; i < 4; i++) {\n    float w = a_weights[i];\n    getJointDQ(a_joints[i], r, t, s);\n    S += s * w; R += r * w; Qt += t * w;\n  }\n\n  float invNorm = 1.0 / length(R); R *= invNorm; Qt *= invNorm;\n  T = 2.0 * (R.w * Qt.xyz - Qt.w * R.xyz + cross(R.xyz, Qt.xyz));\n}\n\nvec3 VectorTransformQuat(vec3 v, vec4 Q) {\n  return v + 2.0 * cross(Q.xyz, cross(Q.xyz, v) + Q.w * v);\n}\n\nvoid CCSkin(inout vec4 position) {\n  vec4 R; vec3 T, S;\n  skinRTS(R, T, S);\n  position.xyz = VectorTransformQuat(position.xyz * S, R) + T;\n}\n\nvoid CCSkin(inout StandardAttributes attr) {\n  vec4 R; vec3 T, S;\n  skinRTS(R, T, S);\n  attr.position.xyz = VectorTransformQuat(attr.position.xyz * S, R) + T;\n  attr.normal = VectorTransformQuat(attr.normal, R);\n  attr.tangent.xyz = VectorTransformQuat(attr.tangent.xyz, R);\n}\n\n#endif\n\nstruct StandardVertInput {\n  highp vec4 position;\n  vec3 normal;\n  vec4 tangent;\n  int index;\n};\n\nvoid CCAttrToInput (in StandardAttributes attr, out StandardVertInput In) {\n  In.position = attr.position;\n  In.normal = attr.normal;\n  In.tangent = attr.tangent;\n  In.index = attr.index;\n}\n\nvoid CCVertInput (out StandardVertInput In) {\n  StandardAttributes attr;\n  CCDecode(attr);\n  #if CC_USE_SKINNING\n    CCSkin(attr);\n  #endif\n  CCAttrToInput(attr, In);\n}\n\nattribute vec2 a_texCoord;\nvarying vec3 v_position;\nvarying vec2 v_uv;\nvarying vec3 v_normal;\n#if USE_NORMAL_MAP\n  varying vec3 v_tangent;\n  varying vec3 v_bitangent;\n#endif\n\nuniform vec4 tilingOffset;\n\nhighp vec4 vert () {\n  StandardVertInput In;\n  CCVertInput(In);\n\n  highp mat4 matWorld, matWorldIT;\n  CCGetWorldMatrixFull(matWorld, matWorldIT);\n\n  highp vec4 pos = matWorld * In.position;\n  v_position = pos.xyz;\n  v_uv = a_texCoord * tilingOffset.xy + tilingOffset.zw;\n\n  v_normal = (matWorldIT * vec4(In.normal, 0.0)).xyz;\n  #if USE_NORMAL_MAP\n    v_tangent = normalize((matWorldIT * vec4(In.tangent.xyz, 0.0)).xyz);\n    v_bitangent = cross(v_normal, v_tangent) * In.tangent.w;\n  #endif\n\n  return cc_matProj * (cc_matView * matWorld) * In.position;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision highp float;\nuniform vec4 cc_cameraPos;\nuniform vec4 cc_exposure;\nuniform vec4 cc_mainLitDir;\nuniform vec4 cc_mainLitColor;\n\n#define saturate(a) clamp( a, 0.0, 1.0 )\nuniform highp vec4 cc_sphereLitPos[2];\nuniform vec4 cc_sphereLitSizeRange[2];\nuniform vec4 cc_sphereLitColor[2];\nuniform highp vec4 cc_spotLitPos[2];\nuniform vec4 cc_spotLitSizeRangeAngle[2];\nuniform vec4 cc_spotLitDir[2];\nuniform vec4 cc_spotLitColor[2];\n\nfloat SmoothDistAtt2(float distSqr, float invSqrAttRadius) {\n  float factor = distSqr * invSqrAttRadius;\n  float factor2 = factor * factor;\n  float factor3 = factor2 * factor2;\n  float smoothFactor = clamp(1.0 - factor3 * factor3, 0.0, 1.0);\n  return smoothFactor * smoothFactor;\n}\n\nfloat SmoothDistAtt(float distSqr, float invSqrAttRadius) {\n  float factor = distSqr * invSqrAttRadius;\n  float smoothFactor = clamp(1.0 - factor * factor, 0.0, 1.0);\n  return smoothFactor * smoothFactor;\n}\n\nfloat GetDistAtt(float distSqr, float invSqrAttRadius) {\n  float attenuation = 1.0 / max(distSqr, 0.01*0.01);\n  attenuation *= SmoothDistAtt(distSqr , invSqrAttRadius);\n  return attenuation;\n}\n\nfloat GetAngleAtt(vec3 L, vec3 litDir, float litAngleScale, float litAngleOffset) {\n  float cd = dot(litDir, L);\n  float attenuation = clamp(cd * litAngleScale + litAngleOffset, 0.0, 1.0);\n  return (attenuation * attenuation);\n}\n\nstruct ToonSurface {\n  vec4 baseColor;\n  vec4 specular;\n  vec3 position;\n  vec3 normal;\n  vec3 shade1;\n  vec3 shade2;\n  vec3 emissive;\n  float baseStep;\n  float baseFeather;\n  float shadeStep;\n  float shadeFeather;\n};\nvec4 CCToonShading (ToonSurface s) {\n  vec3 V = normalize(cc_cameraPos.xyz - s.position);\n  vec3 N = s.normal;\n\n  vec3 L = normalize(-cc_mainLitDir.xyz);\n  float NL = 0.5 * dot(N, L) + 0.5;\n  float NH = 0.5 * dot(normalize(V + L), N) + 0.5;\n  vec3 lightColor = cc_mainLitColor.rgb * cc_mainLitColor.w * s.baseStep;\n\n  vec3 diffuse = mix(s.shade1, s.shade2,\n    clamp(1.0 + (s.shadeStep - s.shadeFeather - NL) / s.shadeFeather, 0.0, 1.0));\n  diffuse = mix(s.baseColor.rgb, diffuse,\n    clamp(1.0 + (s.baseStep - s.baseFeather - NL) / s.baseFeather, 0.0, 1.0));\n\n  float specularWeight = 1.0 - pow(s.specular.a, 5.0);\n  float specularMask = step(specularWeight, NH);\n  vec3 specular = s.specular.rgb * specularMask;\n\n  vec3 finalColor = lightColor * (diffuse + specular);\n  for (int i = 0; i < 2; i++) {\n    vec3 PLU = cc_sphereLitPos[i].xyz - s.position;\n    vec3 PL = normalize(PLU);\n    vec3 PH = normalize(PL + V);\n    float PNL = 0.5 * dot(N, PL) + 0.5;\n    float PNH = 0.5 * dot(N, PH) + 0.5;\n\n    float distSqr = dot(PLU, PLU);\n    float litRadius = cc_sphereLitSizeRange[i].x;\n    float litRadiusSqr = litRadius * litRadius;\n    float illum = litRadiusSqr / max(litRadiusSqr , distSqr);\n    float attRadiusSqrInv = 1.0 / max(cc_sphereLitSizeRange[i].y, 0.01);\n    attRadiusSqrInv *= attRadiusSqrInv;\n    float att = GetDistAtt(distSqr, attRadiusSqrInv);\n    vec3 lightColor = PNL * cc_sphereLitColor[i].rgb * cc_sphereLitColor[i].a * illum * att * s.baseStep;\n\n    vec3 diffuse = mix(s.shade1, s.shade2,\n      clamp(1.0 + (s.shadeStep - s.shadeFeather - PNL) / s.shadeFeather, 0.0, 1.0));\n    diffuse = mix(s.baseColor.rgb, diffuse,\n      clamp(1.0 + (s.baseStep - s.baseFeather - PNL) / s.baseFeather, 0.0, 1.0));\n\n    float specularMask = step(specularWeight, PNH);\n    vec3 specular = s.specular.rgb * specularMask;\n\n    finalColor += lightColor * (diffuse + specular);\n  }\n  for (int i = 0; i < 2; i++) {\n    vec3 SLU = cc_spotLitPos[i].xyz - s.position;\n    vec3 SL = normalize(SLU);\n    vec3 SH = normalize(SL + V);\n    float SNL = 0.5 * dot(N, SL) + 0.5;\n    float SNH = 0.5 * dot(N, SH) + 0.5;\n\n    float distSqr = dot(SLU, SLU);\n    float litRadius = cc_spotLitSizeRangeAngle[i].x;\n    float litRadiusSqr = litRadius * litRadius;\n    float illum = litRadiusSqr / max(litRadiusSqr , distSqr);\n    float attRadiusSqrInv = 1.0 / max(cc_spotLitSizeRangeAngle[i].y, 0.01);\n    attRadiusSqrInv *= attRadiusSqrInv;\n\n    float cosInner = max(dot(-cc_spotLitDir[i].xyz, SL), 0.01);\n    float cosOuter = cc_spotLitSizeRangeAngle[i].z;\n    float litAngleScale = 1.0 / max(0.001, cosInner - cosOuter);\n    float litAngleOffset = -cosOuter * litAngleScale;\n    float att = GetDistAtt(distSqr, attRadiusSqrInv);\n    att *= GetAngleAtt(SL, -cc_spotLitDir[i].xyz, litAngleScale, litAngleOffset);\n\n    lightColor = SNL * cc_spotLitColor[i].rgb * cc_spotLitColor[i].w * illum * att * s.baseStep;\n\n    vec3 diffuse = mix(s.shade1, s.shade2,\n      clamp(1.0 + (s.shadeStep - s.shadeFeather - SNL) / s.shadeFeather, 0.0, 1.0));\n    diffuse = mix(s.baseColor.rgb, diffuse,\n      clamp(1.0 + (s.baseStep - s.baseFeather - SNL) / s.baseFeather, 0.0, 1.0));\n\n    float specularMask = step(specularWeight, SNH);\n    vec3 specular = s.specular.rgb * specularMask;\n\n    finalColor += lightColor * (diffuse + specular);\n  }\n\n  #if CC_USE_HDR\n    s.emissive *= cc_exposure.w;\n  #endif\n  finalColor += s.emissive;\n\n  return vec4(finalColor, s.baseColor.a);\n}\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec3 ACESToneMap(vec3 color) {\n    const float A = 2.51;\n    const float B = 0.03;\n    const float C = 2.43;\n    const float D = 0.59;\n    const float E = 0.14;\n    return (color * (A * color + B)) / (color * (C * color + D) + E);\n}\n\nvec4 CCFragOutput (vec4 color) {\n  #if !CC_USE_HDR\n    color.rgb = ACESToneMap(color.rgb);\n    color.rgb = LinearToSRGB(color.rgb);\n  #endif\n  return color;\n}\n\nvarying vec3 v_position;\nvarying vec2 v_uv;\n\nvarying vec3 v_normal;\n#if USE_NORMAL_MAP\n  varying vec3 v_tangent;\n  varying vec3 v_bitangent;\n  uniform sampler2D normalMap;\n#endif\n\n#if USE_BASE_COLOR_MAP\n  uniform sampler2D baseColorMap;\n#endif\n#if USE_1ST_SHADE_MAP\n  uniform sampler2D shadeMap1;\n#endif\n#if USE_2ND_SHADE_MAP\n  uniform sampler2D shadeMap2;\n#endif\n#if USE_SPECULAR_MAP\n  uniform sampler2D specularMap;\n#endif\n#if USE_EMISSIVE_MAP\n  uniform sampler2D emissiveMap;\n#endif\n\nuniform vec4 baseColor;\nuniform vec4 colorScale;\nuniform vec4 shadeColor1;\nuniform vec4 shadeColor2;\nuniform vec4 specular;\nuniform vec4 shadeParams;\nuniform vec4 emissive;\nuniform vec4 emissiveScale;\n\n#if USE_ALPHA_TEST\n#endif\n\nvoid surf (out ToonSurface s) {\n  s.shade2 = shadeColor2.rgb * colorScale.rgb;\n  #if USE_2ND_SHADE_MAP\n    s.shade2 *= SRGBToLinear(texture2D(shadeMap2, v_uv).rgb);\n  #endif\n  s.shade1 = shadeColor1.rgb * colorScale.rgb;\n  #if USE_1ST_SHADE_MAP\n    s.shade1 *= SRGBToLinear(texture2D(shadeMap1, v_uv).rgb);\n    #if SHADE_MAP_1_AS_SHADE_MAP_2\n      s.shade2 *= s.shade1.rgb;\n    #endif\n  #endif\n\n  vec4 baseColor = baseColor;\n  #if USE_BASE_COLOR_MAP\n    vec4 baseColorMap = texture2D(baseColorMap, v_uv);\n    baseColorMap.rgb = SRGBToLinear(baseColorMap.rgb);\n    baseColor *= baseColorMap;\n    #if BASE_COLOR_MAP_AS_SHADE_MAP_1\n      s.shade1 *= baseColorMap.rgb;\n    #endif\n    #if BASE_COLOR_MAP_AS_SHADE_MAP_2\n      s.shade2 *= baseColorMap.rgb;\n    #endif\n  #endif\n  s.baseColor = baseColor;\n  s.baseColor.rgb *= colorScale.xyz;\n\n  #if USE_ALPHA_TEST\n    if (s.baseColor.ALPHA_TEST_CHANNEL < baseColorScale.w) discard;\n  #endif\n\n  s.normal = normalize(v_normal);\n  #if USE_NORMAL_MAP\n    vec3 nmmp = texture2D(normalMap, v_uv).xyz - vec3(0.5);\n    s.normal = normalize(\n      nmmp.x * normalize(v_tangent) +\n      nmmp.y * normalize(v_bitangent) +\n      nmmp.z * s.normal);\n  #endif\n\n  s.position = v_position;\n\n  s.specular = specular;\n  #if USE_SPECULAR_MAP\n    s.specular.rgb *= SRGBToLinear(texture2D(specularMap, v_uv).rgb);\n  #endif\n\n  s.emissive = emissive.rgb * emissiveScale.xyz;\n  #if USE_EMISSIVE_MAP\n    s.emissive *= SRGBToLinear(texture2D(emissiveMap, v_uv).rgb);\n  #endif\n\n  s.baseStep = shadeParams.x;\n  s.baseFeather = shadeParams.y;\n  s.shadeStep = shadeParams.z;\n  s.shadeFeather = shadeParams.w;\n}\n\nvec4 frag () {\n  ToonSurface s; surf(s);\n  vec4 color = CCToonShading(s);\n  return CCFragOutput(color);\n}\n\nvoid main() { gl_FragColor = frag(); }\n"
+      },
+      "builtins": {
+        "globals": {
+          "blocks": [
+            {
+              "name": "CCGlobal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        },
+        "locals": {
+          "blocks": [
+            {
+              "name": "CCLocalBatched",
+              "defines": [
+                "CC_USE_BATCHING"
+              ]
+            },
+            {
+              "name": "CCLocal",
+              "defines": []
+            },
+            {
+              "name": "CCSkinningTexture",
+              "defines": [
+                "CC_USE_SKINNING"
+              ]
+            },
+            {
+              "name": "CCSkinningAnimation",
+              "defines": [
+                "CC_USE_SKINNING"
+              ]
+            },
+            {
+              "name": "CCForwardLight",
+              "defines": []
+            }
+          ],
+          "samplers": [
+            {
+              "name": "cc_jointsTexture",
+              "defines": [
+                "CC_USE_SKINNING"
+              ]
+            }
+          ]
+        }
+      },
+      "defines": [
+        {
+          "name": "CC_USE_BATCHING",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "CC_USE_SKINNING",
+          "type": "number",
+          "defines": [],
+          "range": [
+            0,
+            2
+          ]
+        },
+        {
+          "name": "USE_NORMAL_MAP",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "CC_USE_HDR",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "USE_BASE_COLOR_MAP",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "USE_1ST_SHADE_MAP",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "USE_2ND_SHADE_MAP",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "USE_SPECULAR_MAP",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "USE_EMISSIVE_MAP",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "USE_ALPHA_TEST",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "ALPHA_TEST_CHANNEL",
+          "type": "string",
+          "defines": [
+            "USE_ALPHA_TEST"
+          ],
+          "options": [
+            "a",
+            "r",
+            "g",
+            "b"
+          ]
+        },
+        {
+          "name": "SHADE_MAP_1_AS_SHADE_MAP_2",
+          "type": "boolean",
+          "defines": [
+            "USE_1ST_SHADE_MAP"
+          ]
+        },
+        {
+          "name": "BASE_COLOR_MAP_AS_SHADE_MAP_1",
+          "type": "boolean",
+          "defines": [
+            "USE_BASE_COLOR_MAP"
+          ]
+        },
+        {
+          "name": "BASE_COLOR_MAP_AS_SHADE_MAP_2",
+          "type": "boolean",
+          "defines": [
+            "USE_BASE_COLOR_MAP"
+          ]
+        }
+      ],
+      "blocks": [
+        {
+          "name": "ToonVert",
+          "members": [
+            {
+              "name": "tilingOffset",
+              "type": 16,
+              "count": 1
+            }
+          ],
+          "defines": [],
+          "binding": 0
+        },
+        {
+          "name": "ToonFrag",
+          "members": [
+            {
+              "name": "baseColor",
+              "type": 16,
+              "count": 1
+            },
+            {
+              "name": "colorScale",
+              "type": 16,
+              "count": 1
+            },
+            {
+              "name": "shadeColor1",
+              "type": 16,
+              "count": 1
+            },
+            {
+              "name": "shadeColor2",
+              "type": 16,
+              "count": 1
+            },
+            {
+              "name": "specular",
+              "type": 16,
+              "count": 1
+            },
+            {
+              "name": "shadeParams",
+              "type": 16,
+              "count": 1
+            },
+            {
+              "name": "emissive",
+              "type": 16,
+              "count": 1
+            },
+            {
+              "name": "emissiveScale",
+              "type": 16,
+              "count": 1
+            }
+          ],
+          "defines": [],
+          "binding": 1
+        }
+      ],
+      "samplers": [
+        {
+          "name": "normalMap",
+          "type": 28,
+          "count": 1,
+          "defines": [
+            "USE_NORMAL_MAP"
+          ],
+          "binding": 30
+        },
+        {
+          "name": "baseColorMap",
+          "type": 28,
+          "count": 1,
+          "defines": [
+            "USE_BASE_COLOR_MAP"
+          ],
+          "binding": 31
+        },
+        {
+          "name": "shadeMap1",
+          "type": 28,
+          "count": 1,
+          "defines": [
+            "USE_1ST_SHADE_MAP"
+          ],
+          "binding": 32
+        },
+        {
+          "name": "shadeMap2",
+          "type": 28,
+          "count": 1,
+          "defines": [
+            "USE_2ND_SHADE_MAP"
+          ],
+          "binding": 33
+        },
+        {
+          "name": "specularMap",
+          "type": 28,
+          "count": 1,
+          "defines": [
+            "USE_SPECULAR_MAP"
+          ],
+          "binding": 34
+        },
+        {
+          "name": "emissiveMap",
+          "type": 28,
+          "count": 1,
+          "defines": [
+            "USE_EMISSIVE_MAP"
+          ],
+          "binding": 35
+        }
+      ],
+      "name": "builtin-toon|toon-vs:vert|toon-fs:frag"
+    }
+  ],
+  "combinations": []
+}

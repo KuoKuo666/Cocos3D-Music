@@ -1,0 +1,149 @@
+{
+  "__type__": "cc.EffectAsset",
+  "_name": "builtin-terrain",
+  "_objFlags": 0,
+  "_native": "",
+  "techniques": [
+    {
+      "name": "opaque",
+      "passes": [
+        {
+          "program": "builtin-terrain|terrain-vs:vert|terrain-fs:frag",
+          "properties": {
+            "UVScale": {
+              "value": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "type": 16
+            },
+            "weightMap": {
+              "value": "black",
+              "type": 28
+            },
+            "detailMap0": {
+              "value": "grey",
+              "type": 28
+            },
+            "detailMap1": {
+              "value": "grey",
+              "type": 28
+            },
+            "detailMap2": {
+              "value": "grey",
+              "type": 28
+            },
+            "detailMap3": {
+              "value": "grey",
+              "type": 28
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "shaders": [
+    {
+      "hash": 936791507,
+      "glsl3": {
+        "vert": "\nprecision mediump float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\nuniform CCLocal {\n  highp mat4 cc_matWorld;\n  highp mat4 cc_matWorldIT;\n};\n\nin vec3 a_position;\nin vec3 a_normal;\nin vec2 a_texCoord;\n\nout vec2 uvw;\nout vec2 uv0;\nout vec2 uv1;\nout vec2 uv2;\nout vec2 uv3;\nout vec3 diffuse;\n\nuniform TexCoords {\n  vec4 UVScale;\n};\n\nvec4 vert () {\n  vec4 pos = vec4(a_position, 1);\n  pos = cc_matWorld * pos;\n  pos = cc_matViewProj * pos;\n\n  uvw = a_texCoord;\n  uv0 = a_position.xz * UVScale.x;\n  uv1 = a_position.xz * UVScale.y;\n  uv2 = a_position.xz * UVScale.z;\n  uv3 = a_position.xz * UVScale.w;\n\n  vec3 L = normalize(-cc_mainLitDir.xyz);\n  vec3 N = a_normal;\n\n  float fAmb = dot(N, vec3(0.0, -1.0, 0.0)) * 0.5 + 0.5;\n  vec3 ambDiff = mix(cc_ambientSky.rgb, cc_ambientGround.rgb, fAmb) * cc_ambientSky.w;\n\n  diffuse = ambDiff + vec3(dot(N, L));\n\n  return pos;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision mediump float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec4 CCFragOutput(vec4 color) {\n  #if CC_USE_HDR\n    color.rgb = mix(color.rgb, SRGBToLinear(color.rgb) * cc_exposure.w, vec3(cc_exposure.z));\n\t#endif\n\treturn color;\n}\n\n  in vec2 uvw;\n  in vec2 uv0;\n  in vec2 uv1;\n  in vec2 uv2;\n  in vec2 uv3;\n  in vec3 diffuse;\n\n  uniform sampler2D weightMap;\n  uniform sampler2D detailMap0;\n  uniform sampler2D detailMap1;\n  uniform sampler2D detailMap2;\n  uniform sampler2D detailMap3;\n\nvec4 frag () {\n  vec4 color = vec4(0, 0, 0, 0);\n\n  #if LAYERS == 1\n    color = texture(detailMap0, uv0);\n  #elif LAYERS == 2\n    vec4 w = texture(weightMap, uvw);\n\n    color += texture(detailMap0, uv0) * w.r;\n    color += texture(detailMap1, uv1) * w.g;\n  #elif LAYERS == 3\n    vec4 w = texture(weightMap, uvw);\n\n    color += texture(detailMap0, uv0) * w.r;\n    color += texture(detailMap1, uv1) * w.g;\n    color += texture(detailMap2, uv2) * w.b;\n  #elif LAYERS == 4\n    vec4 w = texture(weightMap, uvw);\n\n    color += texture(detailMap0, uv0) * w.r;\n    color += texture(detailMap1, uv1) * w.g;\n    color += texture(detailMap2, uv2) * w.b;\n    color += texture(detailMap3, uv3) * w.a;\n  #else\n    color = texture(detailMap0, uv0);\n  #endif\n\n  color.rgb *= diffuse;\n\n  return CCFragOutput(color);\n}\n\nout vec4 cc_FragColor;\nvoid main() { cc_FragColor = frag(); }\n"
+      },
+      "glsl1": {
+        "vert": "\nprecision mediump float;\nuniform mat4 cc_matViewProj;\nuniform vec4 cc_mainLitDir;\nuniform vec4 cc_ambientSky;\nuniform vec4 cc_ambientGround;\nuniform highp mat4 cc_matWorld;\n\nattribute vec3 a_position;\nattribute vec3 a_normal;\nattribute vec2 a_texCoord;\n\nvarying vec2 uvw;\nvarying vec2 uv0;\nvarying vec2 uv1;\nvarying vec2 uv2;\nvarying vec2 uv3;\nvarying vec3 diffuse;\n\nuniform vec4 UVScale;\n\nvec4 vert () {\n  vec4 pos = vec4(a_position, 1);\n  pos = cc_matWorld * pos;\n  pos = cc_matViewProj * pos;\n\n  uvw = a_texCoord;\n  uv0 = a_position.xz * UVScale.x;\n  uv1 = a_position.xz * UVScale.y;\n  uv2 = a_position.xz * UVScale.z;\n  uv3 = a_position.xz * UVScale.w;\n\n  vec3 L = normalize(-cc_mainLitDir.xyz);\n  vec3 N = a_normal;\n\n  float fAmb = dot(N, vec3(0.0, -1.0, 0.0)) * 0.5 + 0.5;\n  vec3 ambDiff = mix(cc_ambientSky.rgb, cc_ambientGround.rgb, fAmb) * cc_ambientSky.w;\n\n  diffuse = ambDiff + vec3(dot(N, L));\n\n  return pos;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision mediump float;\nuniform vec4 cc_exposure;\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec4 CCFragOutput(vec4 color) {\n  #if CC_USE_HDR\n    color.rgb = mix(color.rgb, SRGBToLinear(color.rgb) * cc_exposure.w, vec3(cc_exposure.z));\n\t#endif\n\treturn color;\n}\n\n  varying vec2 uvw;\n  varying vec2 uv0;\n  varying vec2 uv1;\n  varying vec2 uv2;\n  varying vec2 uv3;\n  varying vec3 diffuse;\n\n  uniform sampler2D weightMap;\n  uniform sampler2D detailMap0;\n  uniform sampler2D detailMap1;\n  uniform sampler2D detailMap2;\n  uniform sampler2D detailMap3;\n\nvec4 frag () {\n  vec4 color = vec4(0, 0, 0, 0);\n\n  #if LAYERS == 1\n    color = texture2D(detailMap0, uv0);\n  #elif LAYERS == 2\n    vec4 w = texture2D(weightMap, uvw);\n\n    color += texture2D(detailMap0, uv0) * w.r;\n    color += texture2D(detailMap1, uv1) * w.g;\n  #elif LAYERS == 3\n    vec4 w = texture2D(weightMap, uvw);\n\n    color += texture2D(detailMap0, uv0) * w.r;\n    color += texture2D(detailMap1, uv1) * w.g;\n    color += texture2D(detailMap2, uv2) * w.b;\n  #elif LAYERS == 4\n    vec4 w = texture2D(weightMap, uvw);\n\n    color += texture2D(detailMap0, uv0) * w.r;\n    color += texture2D(detailMap1, uv1) * w.g;\n    color += texture2D(detailMap2, uv2) * w.b;\n    color += texture2D(detailMap3, uv3) * w.a;\n  #else\n    color = texture2D(detailMap0, uv0);\n  #endif\n\n  color.rgb *= diffuse;\n\n  return CCFragOutput(color);\n}\n\nvoid main() { gl_FragColor = frag(); }\n"
+      },
+      "builtins": {
+        "globals": {
+          "blocks": [
+            {
+              "name": "CCGlobal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        },
+        "locals": {
+          "blocks": [
+            {
+              "name": "CCLocal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        }
+      },
+      "defines": [
+        {
+          "name": "CC_USE_HDR",
+          "type": "boolean",
+          "defines": []
+        },
+        {
+          "name": "LAYERS",
+          "type": "number",
+          "defines": [],
+          "range": [
+            0,
+            3
+          ]
+        }
+      ],
+      "blocks": [
+        {
+          "name": "TexCoords",
+          "members": [
+            {
+              "name": "UVScale",
+              "type": 16,
+              "count": 1
+            }
+          ],
+          "defines": [],
+          "binding": 0
+        }
+      ],
+      "samplers": [
+        {
+          "name": "weightMap",
+          "type": 28,
+          "count": 1,
+          "defines": [],
+          "binding": 30
+        },
+        {
+          "name": "detailMap0",
+          "type": 28,
+          "count": 1,
+          "defines": [],
+          "binding": 31
+        },
+        {
+          "name": "detailMap1",
+          "type": 28,
+          "count": 1,
+          "defines": [],
+          "binding": 32
+        },
+        {
+          "name": "detailMap2",
+          "type": 28,
+          "count": 1,
+          "defines": [],
+          "binding": 33
+        },
+        {
+          "name": "detailMap3",
+          "type": 28,
+          "count": 1,
+          "defines": [],
+          "binding": 34
+        }
+      ],
+      "name": "builtin-terrain|terrain-vs:vert|terrain-fs:frag"
+    }
+  ],
+  "combinations": []
+}

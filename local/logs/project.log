@@ -1,0 +1,563 @@
+2019-12-24 22:27:19-log: preferences@1.0.0 enable
+2019-12-24 22:27:20-log: Parse [/Applications/CocosCreator3D.app/Contents/Resources/resources/3d/engine/index.ts] : walk 481  files.
+2019-12-24 22:27:20-log: Parse [/Applications/CocosCreator3D.app/Contents/Resources/resources/3d/engine/index.ts]: 1474.400ms
+2019-12-24 22:27:20-log: QuickCompiler compileFinished: 32.295ms
+2019-12-24 22:27:20-log: QuickCompiler rebuild finished: 1599.699ms
+2019-12-24 22:27:21-log: engine@1.0.0 enable
+2019-12-24 22:27:21-log: asset-db@1.0.0 enable
+2019-12-24 22:27:21-log: console@1.0.0 enable
+2019-12-24 22:27:21-log: scene@1.0.0 enable
+2019-12-24 22:27:21-log: ui-kit@1.0.0 enable
+2019-12-24 22:27:21-log: assets@1.0.0 enable
+2019-12-24 22:27:21-log: inspector@1.0.0 enable
+2019-12-24 22:27:21-log: hierarchy@1.0.0 enable
+2019-12-24 22:27:21-log: packager@1.0.0 enable
+2019-12-24 22:27:21-log: project-setting@1.0.0 enable
+2019-12-24 22:27:21-log: preview@1.0.0 enable
+2019-12-24 22:27:21-log: builder@1.0.0 enable
+2019-12-24 22:27:21-log: animator@1.0.0 enable
+2019-12-24 22:27:21-log: about@1.0.0 enable
+2019-12-24 22:27:21-log: tester@1.0.0 enable
+2019-12-24 22:27:21-log: ipc@1.0.0 enable
+2019-12-24 22:27:21-log: profile@1.0.0 enable
+2019-12-24 22:34:39-info: asset(/Users/kuokuo/Desktop/CCC3D/SuperMusicView/assets/MainScene.scene) saved
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:44-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:45-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:46-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:34:47-error: [preview-error]Uncaught ReferenceError: math is not defined in http://localhost:7456/preview-scripts/assets/script/item-mgr.js
+
+            
+2019-12-24 22:42:26-info: asset(/Users/kuokuo/Desktop/CCC3D/SuperMusicView/assets/MainScene.scene) saved
+2019-12-24 22:42:55-info: asset(/Users/kuokuo/Desktop/CCC3D/SuperMusicView/assets/MainScene.scene) saved
+2019-12-24 22:43:05-info: asset(/Users/kuokuo/Desktop/CCC3D/SuperMusicView/assets/MainScene.scene) saved

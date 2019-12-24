@@ -1,0 +1,72 @@
+{
+  "__type__": "cc.EffectAsset",
+  "_name": "editor/grid-stroke",
+  "_objFlags": 0,
+  "_native": "",
+  "techniques": [
+    {
+      "passes": [
+        {
+          "rasterizerState": {
+            "cullMode": 0
+          },
+          "blendState": {
+            "targets": [
+              {
+                "blend": true,
+                "blendSrc": 2,
+                "blendDst": 4,
+                "blendDstAlpha": 4
+              }
+            ]
+          },
+          "program": "editor/grid-stroke|grid-vs:vert|grid-fs:frag",
+          "priority": 244,
+          "depthStencilState": {
+            "depthTest": true,
+            "depthWrite": false
+          }
+        }
+      ]
+    }
+  ],
+  "shaders": [
+    {
+      "hash": 283235872,
+      "glsl3": {
+        "vert": "\nprecision mediump float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\nin vec2 a_texCoord;\nin vec3 a_position;\nout vec2 uv;\nout vec3 pos_w;\n\nvec4 vert () {\n  uv = a_texCoord;\n  pos_w = a_position;\n  vec2 forward = vec2(cc_matView[0][2], cc_matView[2][2]);\n  float dist = abs(cc_cameraPos.y);\n  vec2 scale = vec2(1.0 - a_texCoord.y, a_texCoord.y);\n  pos_w.xz += scale * vec2((a_texCoord.x * 2.0 - 1.0) * dist * 0.002);\n\n  vec4 pos = cc_matViewProj * vec4(pos_w, 1.0);\n  pos.z += 0.00011;\n  return pos;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision mediump float;\nuniform CCGlobal {\n  vec4 cc_time;\n  vec4 cc_screenSize;\n  vec4 cc_screenScale;\n  vec4 cc_nativeSize;\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_exposure;\n  vec4 cc_mainLitDir;\n  vec4 cc_mainLitColor;\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec4 CCFragOutput(vec4 color) {\n  #if CC_USE_HDR\n    color.rgb = mix(color.rgb, SRGBToLinear(color.rgb) * cc_exposure.w, vec3(cc_exposure.z));\n\t#endif\n\treturn color;\n}\n\nin vec2 uv;\nin vec3 pos_w;\n\nvec4 frag () {\n  float alpha = sqrt(0.5 - abs(uv.x - 0.5));\n  float scale = abs(normalize(cc_cameraPos.xyz - pos_w).y);\n  if (scale < 0.5) alpha *= max(0.3, scale / 0.5);\n  return CCFragOutput(vec4(0.5, 0.5, 0.5, alpha));\n}\n\nout vec4 cc_FragColor;\nvoid main() { cc_FragColor = frag(); }\n"
+      },
+      "glsl1": {
+        "vert": "\nprecision mediump float;\nuniform mat4 cc_matView;\nuniform mat4 cc_matViewProj;\nuniform vec4 cc_cameraPos;\n\nattribute vec2 a_texCoord;\nattribute vec3 a_position;\nvarying vec2 uv;\nvarying vec3 pos_w;\n\nvec4 vert () {\n  uv = a_texCoord;\n  pos_w = a_position;\n  vec2 forward = vec2(cc_matView[0][2], cc_matView[2][2]);\n  float dist = abs(cc_cameraPos.y);\n  vec2 scale = vec2(1.0 - a_texCoord.y, a_texCoord.y);\n  pos_w.xz += scale * vec2((a_texCoord.x * 2.0 - 1.0) * dist * 0.002);\n\n  vec4 pos = cc_matViewProj * vec4(pos_w, 1.0);\n  pos.z += 0.00011;\n  return pos;\n}\n\nvoid main() { gl_Position = vert(); }\n",
+        "frag": "\nprecision mediump float;\nuniform vec4 cc_cameraPos;\nuniform vec4 cc_exposure;\n\nvec3 SRGBToLinear(vec3 gamma)\n{\n\treturn pow(gamma, vec3(2.2));\n}\n\nvec3 LinearToSRGB(vec3 linear)\n{\n\treturn pow(linear, vec3(0.454545));\n}\n\nvec4 CCFragOutput(vec4 color) {\n  #if CC_USE_HDR\n    color.rgb = mix(color.rgb, SRGBToLinear(color.rgb) * cc_exposure.w, vec3(cc_exposure.z));\n\t#endif\n\treturn color;\n}\n\nvarying vec2 uv;\nvarying vec3 pos_w;\n\nvec4 frag () {\n  float alpha = sqrt(0.5 - abs(uv.x - 0.5));\n  float scale = abs(normalize(cc_cameraPos.xyz - pos_w).y);\n  if (scale < 0.5) alpha *= max(0.3, scale / 0.5);\n  return CCFragOutput(vec4(0.5, 0.5, 0.5, alpha));\n}\n\nvoid main() { gl_FragColor = frag(); }\n"
+      },
+      "builtins": {
+        "globals": {
+          "blocks": [
+            {
+              "name": "CCGlobal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        },
+        "locals": {
+          "blocks": [],
+          "samplers": []
+        }
+      },
+      "defines": [
+        {
+          "name": "CC_USE_HDR",
+          "type": "boolean",
+          "defines": []
+        }
+      ],
+      "blocks": [],
+      "samplers": [],
+      "name": "editor/grid-stroke|grid-vs:vert|grid-fs:frag"
+    }
+  ],
+  "combinations": []
+}
